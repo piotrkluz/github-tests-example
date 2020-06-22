@@ -1,4 +1,4 @@
-package dto.model
+package io.github.piotrkluz.dto.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import groovy.transform.Canonical

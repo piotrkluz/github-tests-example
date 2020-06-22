@@ -1,8 +1,8 @@
 package io.github.piotrkluz.client
 
-import dto.CreateRepoRequest
-import dto.model.Repo
 import io.github.piotrkluz.config.Config
+import io.github.piotrkluz.dto.CreateRepoRequest
+import io.github.piotrkluz.dto.model.Repo
 import io.restassured.RestAssured
 import io.restassured.response.Response
 import io.restassured.specification.RequestSpecification

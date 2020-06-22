@@ -1,10 +1,8 @@
-package dto.model
+package io.github.piotrkluz.dto.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.Canonical
-
-import java.time.LocalDateTime
 
 @Canonical
 @JsonIgnoreProperties(ignoreUnknown=true)

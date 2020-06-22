@@ -1,8 +1,8 @@
 package io.github.piotrkluz
 
-import dto.model.Repo
 import io.github.piotrkluz.client.ReposClient
 import io.github.piotrkluz.config.SimpleLogFilter
+import io.github.piotrkluz.dto.model.Repo
 import io.restassured.RestAssured
 import io.restassured.response.Response
 import spock.lang.Specification
