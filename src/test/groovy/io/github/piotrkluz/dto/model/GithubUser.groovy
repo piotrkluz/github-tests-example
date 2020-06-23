@@ -5,7 +5,7 @@ import groovy.transform.Canonical
 
 @Canonical
 @JsonIgnoreProperties(ignoreUnknown=true)
-class RepoOwner {
+class GithubUser {
     long id
     String login
     String type

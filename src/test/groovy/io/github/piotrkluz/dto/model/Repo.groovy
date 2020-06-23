@@ -13,7 +13,7 @@ class Repo {
     String full_name
     @JsonProperty("private")
     boolean private_
-    RepoOwner owner
+    GithubUser owner
     String description
     boolean fork
     String url
