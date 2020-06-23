@@ -1,13 +1,26 @@
 package io.github.piotrkluz.config
 
-class Config {
-    static String accessToken() {
-        String token = System.getenv("token")
+import com.fasterxml.jackson.databind.ObjectMapper
 
-        if(token == null || token.length() == 0) {
-            throw new RuntimeException("Token system property is required. Actual value is '$token'")
+class Config {
+    private static final String FILE = "config.json"
+    private static ConfigModel config = readConfig()
+
+    static String accessToken() {
+        config.githubToken
+    }
+    static String githubApiUrl() {
+        config.githubApiUrl
+    }
+
+    private static ConfigModel readConfig() {
+        ObjectMapper mapper = new ObjectMapper();
+
+        ConfigModel model = mapper.readValue(new File(FILE), ConfigModel.class)
+        if(model.githubToken == null || model.githubToken.size() == 0) {
+            throw new RuntimeException("Please update Github token in $FILE")
         }
 
-        token
+        return model
     }
 }

@@ -1,14 +1,11 @@
 package io.github.piotrkluz.client
 
 import io.github.piotrkluz.config.Config
-import io.github.piotrkluz.dto.CreateRepoRequest
-import io.github.piotrkluz.dto.model.Repo
 import io.restassured.RestAssured
-import io.restassured.response.Response
 import io.restassured.specification.RequestSpecification
 
 abstract class GithubClient {
-    protected String baseUrl = "https://api.github.com"
+    protected String baseUrl = Config.githubApiUrl()
     private String token = Config.accessToken()
 
     RequestSpecification request() {
