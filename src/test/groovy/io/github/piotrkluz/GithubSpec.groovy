@@ -10,20 +10,25 @@ import io.github.piotrkluz.dto.model.GithubUser
 import io.github.piotrkluz.dto.model.Repo
 import io.restassured.RestAssured
 import io.restassured.response.Response
+import spock.lang.Shared
 import spock.lang.Specification
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic
 
 class GithubSpec extends Specification {
     private final static String TEST_REPO_NAME = "api-test-repo4"
-    protected static ReposClient repoClient
-    protected static CommitsClient commitClient
-    protected static PullRequestClient pullRequestClient
-    protected static BranchesClient branchesClient
+    @Shared
+    private ReposClient repoClient
+    @Shared
+    private CommitsClient commitsClient
+    @Shared
+    private PullRequestClient pullRequestClient
+    @Shared
+    private BranchesClient branchesClient
 
     def setupSpec() {
         repoClient = new ReposClient()
-        commitClient = new CommitsClient()
+        commitsClient = new CommitsClient()
         pullRequestClient = new PullRequestClient()
         branchesClient = new BranchesClient()
 
@@ -73,9 +78,9 @@ class GithubSpec extends Specification {
             String fileName = "test" + randomAlphabetic(4) + ".txt"
             String commitMessage = "Add example file"
         when:
-            Response res = commitClient.sendCommitFile(
+            Response res = commitsClient.sendCommitFile(
                     repo,
-                    "develop",
+                    "master",
                     commitMessage,
                     fileName,
                     "Test file content" + randomAlphabetic(4)
@@ -94,15 +99,13 @@ class GithubSpec extends Specification {
             String newBranch = "feature" + randomAlphabetic(3)
             String fileName = "test" + randomAlphabetic(5)
             branchesClient.addBranch(repo, "master", newBranch)
-            commitClient.commitFile(repo, newBranch, "Some commit", fileName, "File content")
+            commitsClient.commitFile(repo, newBranch, "Some commit", fileName, "File content")
 
         when:
             Response res = pullRequestClient.sendCreatePullRequest(repo, newBranch, "master", "Pull request 1")
 
         then:
             res.statusCode == 201
-
-
     }
 
     private Repo getTestRepo() {
@@ -111,10 +114,9 @@ class GithubSpec extends Specification {
 
         if (repo == null) {
             repo = repoClient.createRepo(TEST_REPO_NAME)
-            commitClient.commitFile(repo, "master", "Initial commit", "readme.md", "Hello world")
+            commitsClient.commitFile(repo, "master", "Initial commit", "readme.md", "Hello world")
         }
 
         return repo
-
     }
 }

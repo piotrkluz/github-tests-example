@@ -1,5 +1,13 @@
 # github-tests-example
 
+## How to run
+`./gradlew test`
+
+
+
+
+
+
 ## Requirements
 https://github.com/HStoneAge/code-challenge/blob/master/README-TESTERS.md
 Github API: https://developer.github.com/v3

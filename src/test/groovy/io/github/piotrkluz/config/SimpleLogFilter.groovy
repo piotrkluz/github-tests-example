@@ -8,7 +8,6 @@ import io.restassured.specification.FilterableRequestSpecification
 import io.restassured.specification.FilterableResponseSpecification
 
 import java.nio.charset.Charset
-import java.util.logging.Logger
 
 class SimpleLogFilter implements Filter {
     private final static LIMIT_LENGTH = 2000
@@ -29,7 +28,7 @@ class SimpleLogFilter implements Filter {
         return response
     }
 
-    private static String prepareUri(FilterableRequestSpecification requestSpec) {
+    private String prepareUri(FilterableRequestSpecification requestSpec) {
         return UrlDecoder.urlDecode(
                 requestSpec.getURI(),
                 Charset.forName(requestSpec.getConfig().getEncoderConfig().defaultQueryParameterCharset()),
@@ -37,8 +36,8 @@ class SimpleLogFilter implements Filter {
         )
     }
 
-    private static String prepareBody(String body) {
-        body == null ? "" : body.length() > 2000
+    private String prepareBody(String body) {
+        body == null ? "" : body.length() > LIMIT_LENGTH
                 ? body.substring(0, LIMIT_LENGTH)
                 : body
     }
